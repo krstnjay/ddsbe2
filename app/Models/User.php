@@ -1,13 +1,16 @@
 <?php
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model {
     protected $table = 'tbl_user';
     protected $fillable = [
-        'username', 'password'
+        'username', 'password', 'gender', 'userid'
     ];
+
+    public $timestamp = false;
+    protected $primaryKey = 'userid';
 }
 
 ?>
