@@ -57,13 +57,17 @@
         */
         
         public function show($id){
-            $user = User::where('userid', $id)->first();
+
+            $user = User::findOrFail($id);
+            return $this->successResponse($user);
+
+            /*$user = User::where('userid', $id)->first();
             if ($user){
                 return $this->successResponse($user);
             }
             {
             return $this->errorResponse('User ID Does Not Exist', Response::HTTP_NOT_FOUND);
-            }
+            }*/
         }
 
         /**
@@ -91,11 +95,31 @@
             }
             $user->save();
             return $this->successResponse($user);
-        }
-        {
+            }
+            /*{
             return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
+            }*/
         }
-    }
+
+        /**
+         * Remove an existing user
+         * @return Illuminate\Http\Response
+         */
+
+         public function delete($id){
+             $user = User::findOrFail($id);
+             $user->delete();
+             return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
+             
+             //$user = User::where('userid', $id)->first();
+             /*if ($user){
+                 $user->delete();
+                 return $this->successResponse($user);
+             }
+             {
+                return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
+             }*/
+         }
 
 }
 
